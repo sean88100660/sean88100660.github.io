@@ -33,13 +33,13 @@
         function onSignIn(response) {
             // 解碼 Google 回傳的資訊
             const payload = parseJwt(response.credential);
-            console.log("Login Email: " + payload.email);
-
+            const targetUrl = "https://angry-nectarine-9ed.notion.site/2e9ae883282f8044a017c6e0b33243cf?source=copy_link";
+        
             if (ALLOWED_EMAILS.includes(payload.email)) {
-                document.getElementById('success-box').style.display = 'block';
-                document.querySelector('.g_id_signin').style.display = 'none';
-                document.getElementById('error-msg').style.display = 'none';
+                // ✅ 驗證成功：直接讓「最外層」視窗跳轉
+                window.top.location.href = targetUrl;
             } else {
+                // ❌ 驗證失敗：顯示錯誤訊息
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
