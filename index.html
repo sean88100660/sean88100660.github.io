@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notion Login Verification</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
+        <h3>請使用授權的 Google 帳號登入</h3>
+        
+        <div id="g_id_onload"
+             data-client_id="66194690656-si1917thlbkbdjkhgma4t9qrq8p5p2j0.apps.googleusercontent.com"
+             data-context="signin"
+             data-ux_mode="popup"
+             data-callback="onSignIn"
+             data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin" data-type="standard"></div>
+
+        <div id="success-box" style="display:none; margin-top: 20px; text-align: center;">
+            <p style="color: green;">? 驗證成功！</p>
+            <a href="https://angry-nectarine-9ed.notion.site/2e9ae883282f8044a017c6e0b33243cf?source=copy_link" target="_top" style="padding: 10px 20px; background: black; color: white; text-decoration: none; border-radius: 5px;">點此進入網站</a>
+        </div>
+
+        <p id="error-msg" style="color: red; display: none; margin-top: 20px;">抱歉，您不在授權名單中。</p>
+    </div>
+
+    <script>
+        // 在這裡輸入允許訪問的 Email
+        const ALLOWED_EMAILS = ["ccv271622@gmail.com", "sean881006@gmail.com"];
+
+        function onSignIn(response) {
+            // 解碼 Google 回傳的資訊
+            const payload = parseJwt(response.credential);
+            console.log("登入者 Email: " + payload.email);
+
+            if (ALLOWED_EMAILS.includes(payload.email)) {
+                document.getElementById('success-box').style.display = 'block';
+                document.querySelector('.g_id_signin').style.display = 'none';
+                document.getElementById('error-msg').style.display = 'none';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(window.atob(base64));
+        }
+    </script>
+</body>
+</html>
