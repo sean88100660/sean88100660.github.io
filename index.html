@@ -6,7 +6,7 @@
 </head>
 <body>
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
-        <h3>½Ğ¨Ï¥Î±ÂÅvªº Google ±b¸¹µn¤J</h3>
+        <h3>Please log in with an authorized Google account.</h3>
         
         <div id="g_id_onload"
              data-client_id="66194690656-si1917thlbkbdjkhgma4t9qrq8p5p2j0.apps.googleusercontent.com"
@@ -19,21 +19,21 @@
         <div class="g_id_signin" data-type="standard"></div>
 
         <div id="success-box" style="display:none; margin-top: 20px; text-align: center;">
-            <p style="color: green;">? ÅçÃÒ¦¨¥\¡I</p>
-            <a href="https://angry-nectarine-9ed.notion.site/2e9ae883282f8044a017c6e0b33243cf?source=copy_link" target="_top" style="padding: 10px 20px; background: black; color: white; text-decoration: none; border-radius: 5px;">ÂI¦¹¶i¤Jºô¯¸</a>
+            <p style="color: green;">? Verification successful!</p>
+            <a href="https://angry-nectarine-9ed.notion.site/2e9ae883282f8044a017c6e0b33243cf?source=copy_link" target="_top" style="padding: 10px 20px; background: black; color: white; text-decoration: none; border-radius: 5px;">é»æ­¤é€²å…¥ç¶²ç«™</a>
         </div>
 
-        <p id="error-msg" style="color: red; display: none; margin-top: 20px;">©êºp¡A±z¤£¦b±ÂÅv¦W³æ¤¤¡C</p>
+        <p id="error-msg" style="color: red; display: none; margin-top: 20px;">Sorry, you are not on the authorized list.</p>
     </div>
 
     <script>
-        // ¦b³o¸Ì¿é¤J¤¹³\³X°İªº Email
+        // åœ¨é€™è£¡è¼¸å…¥å…è¨±è¨ªå•çš„ Email
         const ALLOWED_EMAILS = ["ccv271622@gmail.com", "sean881006@gmail.com"];
 
         function onSignIn(response) {
-            // ¸Ñ½X Google ¦^¶Çªº¸ê°T
+            // è§£ç¢¼ Google å›å‚³çš„è³‡è¨Š
             const payload = parseJwt(response.credential);
-            console.log("µn¤JªÌ Email: " + payload.email);
+            console.log("Login Email: " + payload.email);
 
             if (ALLOWED_EMAILS.includes(payload.email)) {
                 document.getElementById('success-box').style.display = 'block';
